@@ -9,15 +9,15 @@ const server = http.createServer(app);
 
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:3000",
-  credentials: true
+  origin: "*",
+  credentials: false
 }));
 
 const io = socketIo(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: "*",
     methods: ["GET", "POST"],
-    credentials: true
+    credentials: false
   }
 });
 
