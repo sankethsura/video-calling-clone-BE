@@ -133,6 +133,17 @@ io.on('connection', (socket) => {
   });
 });
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'WebRTC Signaling Server',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      rooms: '/rooms'
+    }
+  });
+});
+
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'ok', 
