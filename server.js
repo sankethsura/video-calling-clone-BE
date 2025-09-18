@@ -9,16 +9,28 @@ const server = http.createServer(app);
 
 app.use(helmet());
 app.use(cors({
-  origin: "*",
+  origin: [
+    "http://localhost:3000", 
+    "http://127.0.0.1:3000",
+    "https://video-calling-clone.vercel.app"
+  ],
   credentials: false
 }));
 
 const io = socketIo(server, {
   cors: {
-    origin: "*",
+    origin: [
+      "http://localhost:3000", 
+      "http://127.0.0.1:3000",
+      "https://video-calling-clone.vercel.app"
+    ],
     methods: ["GET", "POST"],
     credentials: false
-  }
+  },
+  transports: ['websocket', 'polling'],
+  allowEIO3: true,
+  pingTimeout: 60000,
+  pingInterval: 25000
 });
 
 const rooms = new Map();
