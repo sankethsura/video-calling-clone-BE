@@ -69,6 +69,10 @@ io.on('connection', (socket) => {
       return;
     }
     
+    // Get existing participants before adding new one
+    const existingParticipants = Array.from(room.participants);
+    console.log(`Existing participants in room ${roomId}:`, existingParticipants);
+    
     room.participants.add(socket.id);
     socket.join(roomId);
     
@@ -85,10 +89,11 @@ io.on('connection', (socket) => {
         stunServers: STUN_SERVERS 
       });
       
-      const otherParticipant = Array.from(room.participants).find(id => id !== socket.id);
-      if (otherParticipant) {
-        io.to(otherParticipant).emit('peer-joined', { peerId: socket.id });
-      }
+      // Notify each existing participant about the new peer
+      existingParticipants.forEach(participantId => {
+        console.log(`Sending peer-joined event from ${socket.id} to ${participantId}`);
+        io.to(participantId).emit('peer-joined', { peerId: socket.id });
+      });
     }
     
     console.log(`Room ${roomId} now has ${room.participants.size} participants`);
