@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const app = express();
 const server = http.createServer(app);
 
+console.log("app running");
 app.use(helmet());
 app.use(cors({
   origin: [
