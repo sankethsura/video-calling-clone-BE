@@ -11,26 +11,14 @@ console.log("app running");
 app.use(helmet());
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://127.0.0.1:3000",
-      "https://video-calling-clone.vercel.app",
-      "http://ec2-13-233-89-60.ap-south-1.compute.amazonaws.com",
-      "http://13.203.98.246"
-    ],
+    origin: "*",   // allow all origins
     credentials: false,
   })
 );
 
 const io = socketIo(server, {
   cors: {
-    origin: [
-      "http://localhost:3000",
-      "http://127.0.0.1:3000",
-      "https://video-calling-clone.vercel.app",
-      "http://ec2-13-233-89-60.ap-south-1.compute.amazonaws.com",
-      "http://13.203.98.246"
-    ],
+    origin: "*",   // allow all origins
     methods: ["GET", "POST"],
     credentials: false,
   },
