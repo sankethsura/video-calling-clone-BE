@@ -16,6 +16,7 @@ app.use(
       "http://127.0.0.1:3000",
       "https://video-calling-clone.vercel.app",
       "http://ec2-13-233-89-60.ap-south-1.compute.amazonaws.com",
+      "http://13.203.98.246"
     ],
     credentials: false,
   })
@@ -28,6 +29,7 @@ const io = socketIo(server, {
       "http://127.0.0.1:3000",
       "https://video-calling-clone.vercel.app",
       "http://ec2-13-233-89-60.ap-south-1.compute.amazonaws.com",
+      "http://13.203.98.246"
     ],
     methods: ["GET", "POST"],
     credentials: false,
